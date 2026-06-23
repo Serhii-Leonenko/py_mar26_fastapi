@@ -1,0 +1,11 @@
+[project]
+name = "py-mar26-fastapi"
+version = "0.1.0"
+description = "Fastapi proj"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "alembic>=1.18.4",
+    "fastapi[standard]>=0.138.0",
+    "sqlalchemy>=2.0.51",
+]
