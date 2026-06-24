@@ -14,3 +14,8 @@ SessionLocal = sessionmaker(
     autocommit=False,
     expire_on_commit=False
 )
+
+
+def get_db():
+    with SessionLocal() as db:
+        yield db
