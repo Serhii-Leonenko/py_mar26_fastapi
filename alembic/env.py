@@ -1,4 +1,3 @@
-import os # added
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
@@ -6,8 +5,11 @@ from sqlalchemy import pool
 from alembic import context
 from dotenv import load_dotenv # added
 
-from models import * # added !!!BEFORE BASE!!!
+# added import models !!!BEFORE BASE!!!
+# \/ \/ \/ \/ \/ \/ \/ \/
+from models import * # noqa
 from db import Base # added
+from core import settings
 
 
 load_dotenv() # added
@@ -17,7 +19,7 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-config.set_main_option('sqlalchemy.url', os.getenv('DATABASE_URL')) # added
+config.set_main_option('sqlalchemy.url', settings.DATABASE_URL) # added
 
 target_metadata = Base.metadata # added
 
