@@ -1,31 +1,34 @@
 from sqlalchemy import select
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from models import User
 from schemas.users import UserCreateSchema
 
 
-def get_all_users(
-    db: Session
+async def get_all_users(
+    db: AsyncSession
 ) -> list[User]:
+    result = await db.scalars(select(User))
+
     return list(
-        db.scalars(select(User)).all()
+        result.all()
     )
 
 
-def create_user(
-    db: Session,
+async def create_user(
+    db: AsyncSession,
     user_data: UserCreateSchema
 ) -> User:
     user = User(**user_data.model_dump())
     db.add(user)
-    db.commit()
-    db.refresh(user)
+    await db.commit()
+    await db.refresh(user)
 
     return user
 
 
-def get_user_by_email(
-    db: Session,
+async def get_user_by_email(
+    db: AsyncSession,
     email: str
 ) -> User | None:
-    return db.scalar(select(User).where(User.email == email))
+    return await db.scalar(select(User).where(User.email == email))
