@@ -1,0 +1,18 @@
+from pydantic import BaseModel, ConfigDict
+from schemas import UserReadSchema
+from schemas import TaskReadSchema
+
+
+class ProjectCreateSchema(BaseModel):
+    name: str
+    description: str
+
+
+class ProjectReadSchema(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    name: str
+    description: str
+    owner: UserReadSchema
+    tasks: list[TaskReadSchema]
