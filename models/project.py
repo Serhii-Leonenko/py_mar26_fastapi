@@ -18,9 +18,8 @@ class Project(Base):
     )
 
     owner_id: Mapped[int] = mapped_column(
-        ForeignKey("users.id"),
+        ForeignKey("users.id", ondelete="CASCADE"),
         nullable=False,
-        on_delete="CASCADE",
     )
     owner: Mapped["User"] = relationship(back_populates="projects")
 

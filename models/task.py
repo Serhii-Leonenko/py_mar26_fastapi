@@ -1,7 +1,7 @@
 import datetime
 import enum
 
-from sqlalchemy import Table, Column, ForeignKey, String, func
+from sqlalchemy import Table, Column, ForeignKey, String, func, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from db import Base
@@ -42,13 +42,16 @@ class Task(Base):
     )
 
     project_id: Mapped[int] = mapped_column(
-        ForeignKey("projects.id"),
+        ForeignKey("projects.id", ondelete="CASCADE"),
         nullable=False,
-        on_delete="CASCADE",
     )
     project: Mapped["Project"] = relationship(back_populates="tasks")
 
     assignees: Mapped[list["User"]] = relationship(
         secondary=task_assignees,
         back_populates="assigned_tasks",
+    )
+
+    __table_args__ = (
+        UniqueConstraint("title", "project_id", name="unique_task_title_per_project"),
     )
