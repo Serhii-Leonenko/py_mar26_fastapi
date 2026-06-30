@@ -7,6 +7,7 @@ class TaskCreateSchema(BaseModel):
     title: str
     description: str
     assignees: list[int]
+    project: int
 
 
 class TaskReadSchema(BaseModel):
