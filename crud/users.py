@@ -32,3 +32,10 @@ async def get_user_by_email(
     email: str
 ) -> User | None:
     return await db.scalar(select(User).where(User.email == email))
+
+
+async def get_user_by_id(
+    db: AsyncSession,
+    owner_id: int
+) -> User | None:
+    return await db.scalar(select(User).where(User.id == owner_id))

@@ -6,6 +6,7 @@ from schemas import TaskReadSchema
 class ProjectCreateSchema(BaseModel):
     name: str
     description: str
+    owner: int
 
 
 class ProjectReadSchema(BaseModel):
