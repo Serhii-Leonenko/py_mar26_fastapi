@@ -2,7 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload, joinedload
 
-from crud.users import get_user_by_id
+from crud.user import get_user_by_id
 from exceptions import OwnerNotFound
 from models import Project, Task
 from schemas import ProjectCreateSchema

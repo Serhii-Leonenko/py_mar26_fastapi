@@ -1,4 +1,4 @@
-from .users import UserReadSchema, UserCreateSchema
+from .user import UserReadSchema, UserCreateSchema
 from .task import TaskReadSchema, TaskCreateSchema, TaskUpdateSchema
 from .project import ProjectReadSchema, ProjectCreateSchema
 

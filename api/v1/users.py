@@ -4,7 +4,7 @@ from fastapi import Depends, HTTPException, APIRouter
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette import status
 
-from crud.users import get_all_users, create_user, get_user_by_email
+from crud.user import get_all_users, create_user, get_user_by_email
 from db.session import get_db
 from schemas import UserCreateSchema, UserReadSchema
 

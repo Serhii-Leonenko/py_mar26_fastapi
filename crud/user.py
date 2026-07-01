@@ -2,7 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from models import User
-from schemas.users import UserCreateSchema
+from schemas.user import UserCreateSchema
 
 
 async def get_all_users(
