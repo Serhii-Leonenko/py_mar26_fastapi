@@ -17,8 +17,7 @@ class User(Base):
 
     projects: Mapped[list["Project"]] = relationship(back_populates="owner")
     assigned_tasks: Mapped[list["Task"]] = relationship(
-        secondary="task_assignees",
-        back_populates="assignees"
+        secondary="task_assignees", back_populates="assignees"
     )
 
     @property

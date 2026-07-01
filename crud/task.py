@@ -11,11 +11,7 @@ async def get_task_by_id(
     session: AsyncSession,
     task_id: int,
 ) -> Task | None:
-    stmt = (
-        select(Task)
-        .where(Task.id == task_id)
-        .options(selectinload(Task.assignees))
-    )
+    stmt = select(Task).where(Task.id == task_id).options(selectinload(Task.assignees))
 
     return await session.scalar(stmt)
 
@@ -27,9 +23,7 @@ async def _get_assignees_by_ids(
     if not assignee_ids:
         return []
 
-    result = await session.scalars(
-        select(User).where(User.id.in_(assignee_ids))
-    )
+    result = await session.scalars(select(User).where(User.id.in_(assignee_ids)))
     assignees = list(result.all())
 
     assignees_from_db = [assignee.id for assignee in assignees]

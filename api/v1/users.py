@@ -19,13 +19,12 @@ async def get_users(db: Annotated[AsyncSession, Depends(get_db)]):
 
 @router.post("/", response_model=UserReadSchema)
 async def create_new_user(
-    user_data: UserCreateSchema,
-    db: Annotated[AsyncSession, Depends(get_db)]
+    user_data: UserCreateSchema, db: Annotated[AsyncSession, Depends(get_db)]
 ):
     if await get_user_by_email(db, user_data.email):
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
-            detail="Email already registered"
+            detail="Email already registered",
         )
 
     return await create_user(db, user_data)

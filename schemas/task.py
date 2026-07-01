@@ -23,4 +23,3 @@ class TaskReadSchema(BaseModel):
 class TaskUpdateSchema(BaseModel):
     status: TaskStatus
     assignees: list[int]
-
