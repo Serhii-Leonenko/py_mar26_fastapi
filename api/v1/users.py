@@ -9,22 +9,22 @@ from db.session import get_db
 from schemas import UserCreateSchema, UserReadSchema
 
 
-router = APIRouter(tags=["users"])
+router = APIRouter(tags=["users"], prefix="/users")
 
 
-@router.get("/users/", response_model=list[UserReadSchema])
+@router.get("/", response_model=list[UserReadSchema])
 async def get_users(db: Annotated[AsyncSession, Depends(get_db)]):
     return await get_all_users(db)
 
 
-@router.post("/users/", response_model=UserReadSchema)
+@router.post("/", response_model=UserReadSchema)
 async def create_new_user(
     user_data: UserCreateSchema,
     db: Annotated[AsyncSession, Depends(get_db)]
 ):
     if await get_user_by_email(db, user_data.email):
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail="Email already registered"
         )
 
