@@ -12,3 +12,4 @@ wheels/
 .idea
 .env
 *.db
+/docs/lesson_auth_jwt.md
