@@ -1,12 +1,11 @@
 from typing import Annotated
 
-from fastapi import Depends, HTTPException, APIRouter
+from fastapi import Depends, APIRouter
 from sqlalchemy.ext.asyncio import AsyncSession
-from starlette import status
 
-from crud.user import get_all_users, create_user, get_user_by_email
+from crud.user import get_all_users
 from db.session import get_db
-from schemas import UserCreateSchema, UserReadSchema
+from schemas import UserReadSchema
 
 
 router = APIRouter(tags=["users"], prefix="/users")

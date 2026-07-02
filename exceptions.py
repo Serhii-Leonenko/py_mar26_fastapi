@@ -24,3 +24,7 @@ class AssigneeNotFound(TaskError):
 class TaskNotFound(TaskError):
     def __init__(self, message="Task not found"):
         super().__init__(message)
+
+
+class InvalidTokenTypeError(Exception):
+    pass
