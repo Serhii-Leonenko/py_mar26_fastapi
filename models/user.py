@@ -20,6 +20,8 @@ class User(Base):
         secondary="task_assignees", back_populates="assignees"
     )
 
+    hashed_password: Mapped[str] = mapped_column(String(255))
+
     @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
